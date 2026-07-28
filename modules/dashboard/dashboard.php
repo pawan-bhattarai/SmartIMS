@@ -48,13 +48,10 @@ Role :
 <b><?php echo $_SESSION["role"]; ?></b>
 
 </p>
-
-<a href="logout.php" class="btn btn-danger">
-
-Logout
-
+<a href="../../auth/logout.php" class="btn btn-danger">
+    <i class="fa-solid fa-right-from-bracket"></i>
+    Logout
 </a>
-
 </body>
 
 </html>
