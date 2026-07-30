@@ -727,6 +727,24 @@ for ($i = 6; $i >= 0; $i--) {
 $chartLabels = [];
 $chartData = [];
 
+// =========================================================
+// DAILY SALES CHART
+// =========================================================
+
+$chartQuery = $conn->query("
+    SELECT
+        DATE(sale_date) AS sale_day,
+        COALESCE(SUM(grand_total), 0) AS total_sales
+    FROM sales
+    WHERE sale_date >= DATE_SUB(CURDATE(), INTERVAL 6 DAY)
+    GROUP BY DATE(sale_date)
+    ORDER BY sale_day ASC
+");
+
+if (!$chartQuery) {
+    die("Daily sales chart query failed: " . $conn->error);
+}
+
 while ($row = $chartQuery->fetch_assoc()) {
 
     $chartLabels[] = date(
